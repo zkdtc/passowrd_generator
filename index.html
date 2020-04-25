@@ -23,7 +23,8 @@
           <h1 class="sep_line"></h1>
           <div class="row" style="border:dashed 3px #9e9d9d;">
             <div class="col-md-12 text-center" style="width: 100%;height:100px;">
-              <input type="text" value="Your Secure Password" id="show-password" style="width: 100%;height:100px;">
+              <textarea type="text" value="Your Secure Password" id="show-password" style="width: 100%;height:90px;margin-top:5px;"></textarea>
+
             </div>
           </div>
         </div>
@@ -38,8 +39,7 @@
             <a id="copy" class="btn btn-secondary btn-lg active rounded-pill" style="margin-top:2%; float:right;width: 70%;" role="button" aria-pressed="true">Copy to Clipboard</a>
         </div>
       </div>
-      <div>
-        <h3 id='status'></h3>
+      <div class="alert alert-primary" role="alert" id="status" style="margin-top:3%;">
       </div>
     </div>
   
@@ -54,7 +54,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script>
-    var len = prompt("What is the length of your password?");
+    var len = prompt("Welcome to password generator! What is the length of your password?");
     while (parseInt(len)<8 || parseInt(len)>128){
           len= prompt("Password length must be within 8 and 128, try again")
       }
@@ -76,10 +76,12 @@
     var copyBtn=document.querySelector('#copy');
     var passwordEl=document.querySelector('#show-password')
 
-    statusEl.innerHTML="Special Character: "+String(specialC)+ "<br>"+
+    statusEl.innerHTML="Password Length:"+String(len)+"<br>"+
+                       "Special Character: "+String(specialC)+ "<br>"+
                        "Numeric Character: "+String(numericC)+"<br>"+
                        "Lowercase Character: "+ String(lowerC)+"<br>"+
-                       "Uppercase Character: " + String(upperC);
+                       "Uppercase Character: " + String(upperC)+"<br>"+
+                       "Click buttons to generate password or copy password to clipboard.";
 
     charset='';
     if(specialC){
@@ -101,12 +103,12 @@
         for (var i = 0, n = charset.length; i < len; ++i) {
             retVal += charset.charAt(Math.floor(Math.random() * n));
     }
-        passwordEl.textContent=retVal;
+        passwordEl.value=retVal;
     }
     
     function copyPassword(){
-      var a=document.getElementById('password-show');
-      a.select();
+      //var a=document.getElementById('password-show');
+      passwordEl.select();
       document.execCommand("copy");
       alert("Password copied to clipboard.");
     }
