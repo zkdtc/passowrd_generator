@@ -7,3 +7,4 @@
 ### If you wnat to include uppercase characters or not. 
 
 When you select all the criteria, click the 'generate password' button to generate the password. Click the 'copy to clipboard' button to copy the password to the clipboard. 
+Visit https://zkdtc.github.io/passowrd_generator/ to try!
