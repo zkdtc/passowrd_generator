@@ -83,29 +83,53 @@
                        "Uppercase Character: " + String(upperC)+"<br>"+
                        "Click buttons to generate password or copy password to clipboard.";
 
-    charset='';
+    var charset='';
     if(specialC){
-        charset=charset+'!#$%&()*+,-./:;<=>?@[]^_`{|}~';
+        var charset_s='!#$%&()*+,-./:;<=>?@[]^_`{|}~';
+        charset=charset+charset_s;
     }
     if(numericC){
-        charset=charset+'0123456789';
+        var charset_n='0123456789';
+        charset=charset+charset_n;
     }
     if(lowerC){
-        charset=charset+'abcdefghijklmnopqrstuvwxyz';
+        var charset_l='abcdefghijklmnopqrstuvwxyz';
+        charset=charset+charset_l;
     }
     if(upperC){
-        charset=charset+'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var charset_u='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        charset=charset+charset_u;
     }
 
     function generatePassword(){
-    retVal = '';
+    var retVal = '';
+    var len_remaining=len;
+        if (specialC){
+          retVal += charset_s.charAt(Math.floor(Math.random() * charset_s.length));
+          len_remaining--;
+        }
+        if (numericC){
+          retVal += charset_n.charAt(Math.floor(Math.random() * charset_n.length));
+          len_remaining--;
+        }
+        if (lowerC){
+          retVal += charset_l.charAt(Math.floor(Math.random() * charset_l.length));
+          len_remaining--;
+        }
+        if (upperC){
+          retVal += charset_u.charAt(Math.floor(Math.random() * charset_u.length));
+          len_remaining--;
+        }
+        for (var i = 0, n = charset.length; i < len_remaining; ++i) {
 
-        for (var i = 0, n = charset.length; i < len; ++i) {
             retVal += charset.charAt(Math.floor(Math.random() * n));
     }
+        // retValsplit=retVal.split("");
+        // retValsplit
         passwordEl.value=retVal;
     }
     
+
     function copyPassword(){
       //var a=document.getElementById('password-show');
       passwordEl.select();
